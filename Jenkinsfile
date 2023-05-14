@@ -14,8 +14,17 @@ pipeline {
                   sh 'scp /var/jenkins_home/workspace/ansible/* ubuntu@172.31.12.38:/home/ubuntu'  
     
                      }
+                    }
+                }  
+
+          stage('docker image build'){
+            steps{
+                sshagent(['ansible']) {
+                  sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.12.38 cd /home/ubuntu/'
+                  sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.12.38 docker image build -t $JOB_NAME:BUILD_ID .'
+
             }
-        }  
+          }      
 
 
     }
