@@ -26,7 +26,7 @@ pipeline {
                  }
                }      
            }
-        stage('docker image build'){
+        stage('image tag'){
             steps{
                 sshagent(['ansible']) {
                   sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.12.38 cd /home/ubuntu/'
